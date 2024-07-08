@@ -9,6 +9,7 @@
 
 <style>
   main {
-    height: calc(100vh - 158px);
+    min-height: calc(100vh - 155px);
+    min-height: calc(var(--vh, 1vh) * 100 - 155px);
   }
 </style>

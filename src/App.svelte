@@ -1,15 +1,13 @@
 <script>
   import Header from "./components/Header.svelte";
-  import Footer from "./components/Footer.svelte";
+  import ShowPolls from "./components/ShowPolls.svelte";
+  import AddPolls from "./components/AddPolls.svelte";
 </script>
 
 <Header />
-<main></main>
-<Footer />
+<main>
+  <AddPolls />
+</main>
 
 <style>
-  main {
-    min-height: calc(100vh - 155px);
-    min-height: calc(var(--vh, 1vh) * 100 - 155px);
-  }
 </style>

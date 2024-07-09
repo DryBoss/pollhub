@@ -4,9 +4,17 @@
   function handleAddOptionClick() {
     pollOptions = [...pollOptions, `option${pollOptions.length + 1}`];
   }
+
+  function handleDeleteClick() {
+    pollOptions = pollOptions.slice(0, -1); 
+  }
+
+  function submit() {
+
+  }
 </script>
 
-<form>
+<form on:submit|preventDefault={submit}>
   <div class="fields">
     <div class="title field">
       <label for="title">Poll Title</label>
@@ -17,20 +25,25 @@
         <div class="option field">
           <label for={option}>Option {index + 1}</label>
           <input type="text" id={option}>
+          {#if index > 1 && index === pollOptions.length - 1}
+            <button class="delete" on:click={handleDeleteClick}>Delete</button>
+          {/if}
         </div>
       {/each}
-      <div class="addOption" on:click={handleAddOptionClick}>
+      <button class="addOption" on:click={handleAddOptionClick}>
         Add Option
-      </div>
+      </button>
     </ul>
   </div>
-  <button class="add">Add</button><button class="cancel">Cancel</button>
+  <button class="done add">Add</button><button class="done cancel">Cancel</button>
 </form>
 
 <style>
   .fields {
-    min-height: calc(var(--vh, 1vh) * 100 - 136px);
+    max-width: 600px;
+    height: calc(var(--vh, 1vh) * 100 - 136px);
     padding: 0 20px;
+    margin: 0 auto;
   }
   .field {
     display: flex;
@@ -46,8 +59,22 @@
     padding: 8px 12px;
     border: none;
     border-radius: 5px;
+    font-size: 1rem;
+  }
+  .delete {
+    width: 60px;
+    color: #d91b42;
+    background-color: transparent;
+    text-align: center;
+    font-size: 0.8rem;
+    padding: 2px;
+    margin-top: 8px;
+    border: 2px solid #d91b42;
+    border-radius: 5px;
   }
   .addOption {
+    width: calc(100% - 20px);
+    background-color: transparent;
     color: #808080;
     text-align: center;
     padding: 8px 12px;
@@ -56,7 +83,7 @@
     margin: 10px;
     margin-bottom: 20px;
   }
-  button {
+  .done {
     width: 50%;
     padding: 12px;
     color: #ffffff;

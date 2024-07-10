@@ -1,8 +1,12 @@
 <script>
+  let pollTitle = "";
+  let titleValid = true;
   let pollOptions = ["", ""];
+  let optionsValid = [true, true];
 
   function handleAddOptionClick() {
     pollOptions = [...pollOptions, ""];
+    optionsValid = [...optionsValid, true];
   }
 
   function handleDeleteClick(index) {
@@ -10,33 +14,41 @@
     pollOptions = pollOptions; 
   }
 
-  function submit() {
-
+  function handleSubmit() {
+    titleValid = pollTitle !== "";
+    for (let i = 0; i < optionsValid.length; i++){
+      optionsValid[i] = pollOptions[i] !== "";
+    }
+    console.log(optionsValid)
   }
 </script>
 
-<form on:submit|preventDefault={submit}>
+<form on:submit|preventDefault={handleSubmit}>
   <div class="fields">
     <div class="title field">
       <label for="title">Poll Title:</label>
-      <input type="text" id="title">
+      <input type="text" id="title" bind:value={pollTitle}>
+      <p class="error" class:hide={titleValid}>title can't be empty</p>
     </div>
     <ul>
       {#each pollOptions as _, index}
         <div class="option field">
-          <label for={`${index}`}>Option:</label>
-          <input type="text" id={`${index}`}>
-          {#if pollOptions.length > 2}
-            <button class="delete" on:click={() => handleDeleteClick(index)}>Delete</button>
-          {/if}
+          <label for={`${index}`}>
+            <p>Option:</p>
+            {#if pollOptions.length > 2}
+              <button class="delete" on:click={() => handleDeleteClick(index)}>Delete</button>
+            {/if}
+          </label>
+          <input type="text" id={`${index}`} bind:value={pollOptions[index]}>
+          <p class="error" class:hide={optionsValid[index]}>option can't be empty</p>
         </div>
       {/each}
-      <button class="addOption" on:click={handleAddOptionClick}>
+      <button class="addOption" on:click={handleAddOptionClick} type="button">
         Add Option
       </button>
     </ul>
   </div>
-  <button class="done add">Add</button><button class="done cancel">Cancel</button>
+  <button class="done add" type="submit">Add</button><button class="done cancel" type="button">Cancel</button>
 </form>
 
 <style>
@@ -56,22 +68,30 @@
     border-radius: 8px;
     line-height: 30px;
   }
+
+  label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .delete {
+    color: #d91b42;
+    background-color: transparent;
+    text-align: center;
+    font-size: 0.8rem;
+  }
   input {
     padding: 8px 12px;
     border: none;
     border-radius: 5px;
     font-size: 1rem;
   }
-  .delete {
-    width: 60px;
+  .error {
+    padding: 2px 4px;
     color: #d91b42;
-    background-color: transparent;
-    text-align: center;
-    font-size: 0.8rem;
-    padding: 2px;
-    margin-top: 8px;
-    border: 2px solid #d91b42;
-    border-radius: 5px;
+  }
+  .hide {
+    display: none;
   }
   .addOption {
     width: calc(100% - 20px);

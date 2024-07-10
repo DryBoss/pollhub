@@ -1,12 +1,13 @@
 <script>
-  let pollOptions = ["option1", "option2"];
+  let pollOptions = ["", ""];
 
   function handleAddOptionClick() {
-    pollOptions = [...pollOptions, `option${pollOptions.length + 1}`];
+    pollOptions = [...pollOptions, ""];
   }
 
-  function handleDeleteClick() {
-    pollOptions = pollOptions.slice(0, -1); 
+  function handleDeleteClick(index) {
+    pollOptions.splice(index, 1);
+    pollOptions = pollOptions; 
   }
 
   function submit() {
@@ -17,16 +18,16 @@
 <form on:submit|preventDefault={submit}>
   <div class="fields">
     <div class="title field">
-      <label for="title">Poll Title</label>
+      <label for="title">Poll Title:</label>
       <input type="text" id="title">
     </div>
     <ul>
-      {#each pollOptions as option, index}
+      {#each pollOptions as _, index}
         <div class="option field">
-          <label for={option}>Option {index + 1}</label>
-          <input type="text" id={option}>
-          {#if index > 1 && index === pollOptions.length - 1}
-            <button class="delete" on:click={handleDeleteClick}>Delete</button>
+          <label for={`${index}`}>Option:</label>
+          <input type="text" id={`${index}`}>
+          {#if pollOptions.length > 2}
+            <button class="delete" on:click={() => handleDeleteClick(index)}>Delete</button>
           {/if}
         </div>
       {/each}

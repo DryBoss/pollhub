@@ -1,4 +1,6 @@
 <script>
+// @ts-nocheck
+
   import Header from "./components/Header.svelte";
   import ShowPolls from "./components/ShowPolls.svelte";
   import AddPolls from "./components/AddPolls.svelte";
@@ -18,9 +20,9 @@
 
 <Header />
 <main>
-  {#if screen == "showPolls"}
-    <ShowPolls on:changeScreen={changeScreen}/>
-  {:else if screen == "addPolls"}
+  {#if screen === "showPolls"}
+    <ShowPolls {polls} on:changeScreen={changeScreen}/>
+  {:else if screen === "addPolls"}
     <AddPolls on:changeScreen={changeScreen} on:newPoll={addNewPoll}/>
     console.log("show")
   {/if}

@@ -1,6 +1,12 @@
 <script>
+// @ts-nocheck
+
+  import PollCard from "./PollCard.svelte";
+
   import { createEventDispatcher } from "svelte";
   let dispatch = createEventDispatcher();
+
+  export let polls;
 
   function changeScreenAddPolls() {
     dispatch("changeScreen", "addPolls")
@@ -9,7 +15,9 @@
 
 <div class="addPoll">
   <ul class="pollList">
-    
+    {#each polls as poll, index (index)}
+      <PollCard {poll}/>
+    {/each}
   </ul>
   <button class="createPoll" on:click={changeScreenAddPolls}>Create poll</button>
 </div>

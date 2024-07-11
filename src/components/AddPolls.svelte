@@ -6,15 +6,18 @@
   let titleValid = true;
   let pollOptions = ["", ""];
   let optionsValid = [true, true];
+  let pollVotes = [0,0];
   let pollValid = false;
 
   function handleAddOptionClick() {
     pollOptions = [...pollOptions, ""];
-    optionsValid = [...optionsValid, true];
+    optionsValid.push(true);
+    pollVotes.push(0)
   }
 
   function handleDeleteClick(index) {
     pollOptions.splice(index, 1);
+    pollVotes.pop();
     pollOptions = pollOptions; 
   }
 
@@ -25,9 +28,13 @@
       pollValid = titleValid && optionsValid[i];
     }
     if (pollValid){
-      let newPoll = [pollTitle, ...pollOptions]
+      let newPoll = [pollTitle, ...pollOptions, ...pollVotes];
       dispatch("newPoll", newPoll)
     }
+  }
+
+  function changeScreenShowPolls() {
+    dispatch("changeScreen", "showPolls")
   }
 </script>
 
@@ -56,7 +63,7 @@
       </button>
     </ul>
   </div>
-  <button class="done add" type="submit">Add</button><button class="done cancel" type="button">Cancel</button>
+  <button class="done add" type="submit">Add</button><button class="done cancel" type="button" on:click={changeScreenShowPolls}>Cancel</button>
 </form>
 
 <style>

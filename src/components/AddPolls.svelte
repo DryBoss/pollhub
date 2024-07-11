@@ -1,8 +1,12 @@
 <script>
+  import { createEventDispatcher } from "svelte";
+  let dispatch = createEventDispatcher();
+
   let pollTitle = "";
   let titleValid = true;
   let pollOptions = ["", ""];
   let optionsValid = [true, true];
+  let pollValid = false;
 
   function handleAddOptionClick() {
     pollOptions = [...pollOptions, ""];
@@ -18,8 +22,12 @@
     titleValid = pollTitle !== "";
     for (let i = 0; i < optionsValid.length; i++){
       optionsValid[i] = pollOptions[i] !== "";
+      pollValid = titleValid && optionsValid[i];
     }
-    console.log(optionsValid)
+    if (pollValid){
+      let newPoll = [pollTitle, ...pollOptions]
+      dispatch("newPoll", newPoll)
+    }
   }
 </script>
 

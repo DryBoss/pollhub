@@ -25,9 +25,8 @@
     titleValid = pollTitle !== "";
     for (let i = 0; i < optionsValid.length; i++){
       optionsValid[i] = pollOptions[i] !== "";
-      pollValid = titleValid && optionsValid[i];
     }
-    if (pollValid){
+    if (titleValid && optionsValid.every((value) => {return value})){
       let newPoll = [pollTitle, ...pollOptions, ...pollVotes];
       dispatch("newPoll", newPoll)
     }

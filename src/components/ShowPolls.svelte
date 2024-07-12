@@ -14,17 +14,29 @@
 </script>
 
 <div class="addPoll">
-  <ul class="pollList">
-    {#each polls as poll, index (index)}
-      <PollCard {poll}/>
-    {/each}
-  </ul>
+  <div class="pollList">
+    <ul class="pollList-1">
+      {#each polls as poll, index (index)}
+        {#if index%2 === 0}
+          <PollCard {poll}/>
+        {/if}
+      {/each}
+    </ul>
+    <ul class="pollList-2">
+      {#each polls as poll, index (index)}
+        {#if index%2 === 1}
+          <PollCard {poll}/>
+        {/if}
+      {/each}
+    </ul>
+  </div>
   <button class="createPoll" on:click={changeScreenAddPolls}>Create poll</button>
 </div>
 
 <style>
   .pollList {
-    max-width: 600px;
+    display: flex;
+    max-width: 900px;
     height: calc(var(--vh, 1vh) * 100 - 136px);
     padding: 0 20px;
     margin: 0 auto;

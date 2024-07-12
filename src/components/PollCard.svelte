@@ -26,5 +26,8 @@
 </li>
 
 <style>
-
+  .options li {
+    display: flex;
+    justify-content: space-between;
+  }
 </style>

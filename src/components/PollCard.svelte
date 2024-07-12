@@ -53,4 +53,18 @@
   .options li:hover {
     opacity: 0.5;
   }
+
+  @media (max-width: 950px) {
+    .poll {
+      width: 600px;
+    }
+  }
+  @media (max-width: 650px) {
+    .poll {
+      width: 300px;
+    }
+    ul {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>

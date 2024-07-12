@@ -12,7 +12,7 @@
 
 </script>
 
-<li>
+<li class="poll">
   <p class="title">
     {pollTitle}
   </p>
@@ -26,8 +26,31 @@
 </li>
 
 <style>
+  .poll {
+    width: 900px;
+    padding: 20px;
+    margin: 20px ;
+    border: 2px dashed #ffa31a;
+    border-radius: 10px;
+  }
+  .title {
+    padding: 20px;
+  }
+  ul {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    width: 100%;
+    padding: 10px;
+  }
   .options li {
     display: flex;
     justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #292929;
+    border-radius: 20px;
+  }
+  .options li:hover {
+    opacity: 0.5;
   }
 </style>

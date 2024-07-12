@@ -15,18 +15,9 @@
 
 <div class="addPoll">
   <div class="pollList">
-    <ul class="pollList-1">
+    <ul>
       {#each polls as poll, index (index)}
-        {#if index%2 === 0}
           <PollCard {poll}/>
-        {/if}
-      {/each}
-    </ul>
-    <ul class="pollList-2">
-      {#each polls as poll, index (index)}
-        {#if index%2 === 1}
-          <PollCard {poll}/>
-        {/if}
       {/each}
     </ul>
   </div>
@@ -35,11 +26,13 @@
 
 <style>
   .pollList {
-    display: flex;
-    max-width: 900px;
+    width: 100%;
     height: calc(var(--vh, 1vh) * 100 - 136px);
-    padding: 0 20px;
-    margin: 0 auto;
+  }
+  ul {
+    width: 100%;
+    display: grid;
+    justify-content: center;
   }
   .createPoll {
     width: 100%;
